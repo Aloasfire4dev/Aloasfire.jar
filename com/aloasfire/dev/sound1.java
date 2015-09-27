@@ -4,12 +4,10 @@ import javax.sound.sampled.*;
 
 public class Sound1{
 	
-	//public static void main(String args[]) 
-	//{
+
 	public static synchronized void playSound() {
 		  new Thread(new Runnable() {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
+		  
 		    public void run() {
 		      try {
 		        Clip clip = AudioSystem.getClip();
@@ -23,5 +21,5 @@ public class Sound1{
 		    }
 		  }).start();
 		}
-	//}
+	
 }
