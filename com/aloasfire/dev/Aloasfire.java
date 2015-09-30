@@ -1,13 +1,21 @@
 package com.aloasfire.dev;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+
+import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class Aloasfire  extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4254370175792140925L;
 	private JButton schliessen;
 	private JButton einstellung;
 	private JButton info;
@@ -16,7 +24,6 @@ public class Aloasfire  extends JFrame implements ActionListener {
 	
 	
 	public static void main(String[] args) {
-		
 		Aloasfire frame = new Aloasfire("Men\u00fc");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(400,400);
@@ -58,16 +65,6 @@ public class Aloasfire  extends JFrame implements ActionListener {
 	}
 	
 	
-	public static void einstell(){
-		JFrame einstell = new JFrame("Einstellungen");
-		einstell.setVisible(true);
-		einstell.setSize(600, 600);
-		JLabel t1 = new JLabel();
-		t1.setText("Lautst\u00e4rke");
-		einstell.add(t1);
-		JSlider Ls = new JSlider(0, 255, 0);
-		einstell.add(Ls);
-	}
 	public static void fenster(){
 		
 		
@@ -77,10 +74,26 @@ public class Aloasfire  extends JFrame implements ActionListener {
 		fenster.setVisible(true);
 		fenster.add(new gui());
 		
+		String p = "Sound1.mp3";
+		try{
+		FileInputStream in = new FileInputStream(p);
+		
+		Player p1 = new Player(in);
+		p1.play();
+		}
+		catch(JavaLayerException jle){
+			jle.printStackTrace();
+		}
+		catch(FileNotFoundException fnf){
+			fnf.printStackTrace();
+		}
+	}
+		
+		
 		
 		
 			
-		}
+		
 		
 	//public static void auswahl(){
 		
@@ -96,13 +109,18 @@ public class Aloasfire  extends JFrame implements ActionListener {
 			fenster();	
 		}
 		if(e.getSource() == einstellung){
-			einstell();
+			Object[] options = { "OK"};
+
+			JOptionPane.showOptionDialog(null,"Bald kannst du hier Einstellungen Vornmen","Coming soon",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);	
+
+			// new Einstellungen();
+			
 		}
 		
 		if (e.getSource() == info ){
 			Object[] options = { "OK"};
 			
-			JOptionPane.showOptionDialog(null,"Programm developed by Aloasfire ink.","Information",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);	
+			JOptionPane.showOptionDialog(null,"Programm developed by Aloasfire ","Information",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,options,options[0]);	
 		}
 		
 		if(e.getSource() == einstellung){
@@ -115,6 +133,8 @@ public class Aloasfire  extends JFrame implements ActionListener {
 			System.exit(0);
 		}
 		
+		
 	}
-
 }
+	
+ 
